@@ -14,9 +14,8 @@
 		047EC6762A57595F005C7B28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047EC6742A57595F005C7B28 /* Main.storyboard */; };
 		047EC6782A575961005C7B28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 047EC6772A575961005C7B28 /* Assets.xcassets */; };
 		047EC67B2A575961005C7B28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047EC6792A575961005C7B28 /* LaunchScreen.storyboard */; };
-		04C6AE7F2A598F7F0060293F /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6AE7E2A598F7F0060293F /* PlaceTableViewCell.swift */; };
 		04C6AE822A598FEA0060293F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04C6AE812A598FEA0060293F /* SnapKit */; };
-		04C6AE842A5995850060293F /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6AE832A5995850060293F /* Place.swift */; };
+		04C6AE842A5995850060293F /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6AE832A5995850060293F /* PlaceModel.swift */; };
 		04EC54BE2A5811BE00083DA7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC54BD2A5811BE00083DA7 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,8 +29,7 @@
 		047EC6772A575961005C7B28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		047EC67A2A575961005C7B28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		047EC67C2A575961005C7B28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04C6AE7E2A598F7F0060293F /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
-		04C6AE832A5995850060293F /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		04C6AE832A5995850060293F /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		04EC54BD2A5811BE00083DA7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,7 +48,6 @@
 		0407C3A62A59A2E300C15AC6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				04C6AE7E2A598F7F0060293F /* PlaceTableViewCell.swift */,
 				0438D1112A59C81100D16FF9 /* CustomTableViewCell.swift */,
 			);
 			path = Cell;
@@ -107,7 +104,7 @@
 		04C6AE852A5995890060293F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				04C6AE832A5995850060293F /* Place.swift */,
+				04C6AE832A5995850060293F /* PlaceModel.swift */,
 				0407C3A42A59A0D200C15AC6 /* InitialPlaces.swift */,
 			);
 			path = Model;
@@ -194,9 +191,8 @@
 				047EC66F2A57595F005C7B28 /* AppDelegate.swift in Sources */,
 				047EC6712A57595F005C7B28 /* SceneDelegate.swift in Sources */,
 				0438D1122A59C81100D16FF9 /* CustomTableViewCell.swift in Sources */,
-				04C6AE7F2A598F7F0060293F /* PlaceTableViewCell.swift in Sources */,
 				0407C3A52A59A0D200C15AC6 /* InitialPlaces.swift in Sources */,
-				04C6AE842A5995850060293F /* Place.swift in Sources */,
+				04C6AE842A5995850060293F /* PlaceModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,8 +12,8 @@ struct InitialPlaces {
         let initialPlaces = ["Royal Pizza", "Trattoria", "Osama", "Passaj", "Balu", "Montana"]
         var places = [Place]()
 
-        for name in initialPlaces {
-            let newPlace = Place(imageName: name, name: name)
+        for place in initialPlaces {
+            let newPlace = Place(name: place, location: "Shostka", type: "Restaurant", image: place)
             places.append(newPlace)
         }
 

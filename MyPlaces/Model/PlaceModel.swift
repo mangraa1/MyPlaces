@@ -8,6 +8,8 @@
 import Foundation
 
 struct Place {
-    var imageName: String?
-    var name: String?
+    let name: String
+    let location: String
+    let type: String
+    let image: String
 }
