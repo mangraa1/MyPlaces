@@ -40,4 +40,8 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
+    //MARK: - @IBAction
+
+    @IBAction func cancelAction(_ segue: UIStoryboardSegue) {}
 }
