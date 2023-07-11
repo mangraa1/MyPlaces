@@ -13,7 +13,7 @@ struct InitialPlaces {
         var places = [Place]()
 
         for place in initialPlaces {
-            let newPlace = Place(name: place, location: "Shostka", type: "Restaurant", image: place)
+            let newPlace = Place(name: place, location: "Shostka", type: "Restaurant",image: nil, restaurantImage: place)
             places.append(newPlace)
         }
 
