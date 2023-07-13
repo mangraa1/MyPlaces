@@ -6,42 +6,42 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UITableViewController {
 
-//    var places = InitialPlaces.makePlaces()
+    var places: Results<Place>! // Returns "Place" objects from the database
 
     //MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        places = realm.objects(Place.self)
     }
 
     // MARK: - Table view data source
 
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return places.count
-//    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CustomTableViewCell else { fatalError() }
-//
-//        let place = places[indexPath.row]
-//
-//        cell.nameLabel.text = place.name
-//        cell.locationLabel.text = place.location
-//        cell.typeLabel.text = place.type
-//
-//        if place.image == nil {
-//            cell.imageOfPlace.image = UIImage(named: place.restaurantImage!)
-//        } else {
-//            cell.imageOfPlace.image = place.image
-//        }
-//
-//        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
-//
-//        return cell
-//    }
+        // Checking if we have at least one "Place" value in the database
+        return places.isEmpty ? 0 : places.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CustomTableViewCell else { fatalError() }
+
+        let place = places[indexPath.row]
+
+        cell.nameLabel.text = place.name
+        cell.locationLabel.text = place.location
+        cell.typeLabel.text = place.type
+        cell.imageOfPlace.image = UIImage(data: place.imageData!)
+
+        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
+
+        return cell
+    }
 
     //MARK: - Table view delegate
 
@@ -59,7 +59,6 @@ class MainViewController: UITableViewController {
         guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
 
         newPlaceVC.saveNewPlace()
-//        places.append(newPlaceVC.newPlace!)
         tableView.reloadData()
     }
 }

@@ -18,17 +18,12 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
 
-    var newPlace = Place()
     var imageIsChanged = false
 
     //MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        DispatchQueue.main.async {
-            self.newPlace.saveInitialPlaces()
-        }
 
         saveButton.isEnabled = false
 
@@ -71,7 +66,6 @@ class NewPlaceViewController: UITableViewController {
     //MARK: - Save new place
 
     func saveNewPlace() {
-
         var image: UIImage?
 
         // Setting a default photo in case the user does not select his photo
@@ -81,12 +75,12 @@ class NewPlaceViewController: UITableViewController {
             image = UIImage(named: "imagePlaceholder")
         }
 
-        // Creating a new location with the data entered by the user
-//        newPlace = Place(name: placeName.text!,
-//                         location: placeLocation.text,
-//                         type: placeType.text,
-//                         image: image,
-//                         restaurantImage: nil)
+        let imageData = image?.pngData()
+
+        // Creating a new location with the data entered by the user (data taken from NewPlace VC)
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+
+        StorageManager.saveObject(newPlace) // Entering into the database
     }
 
     //MARK: - @IBAction
