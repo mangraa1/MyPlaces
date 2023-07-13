@@ -18,13 +18,17 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
 
-    var newPlace: Place?
+    var newPlace = Place()
     var imageIsChanged = false
 
     //MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        DispatchQueue.main.async {
+            self.newPlace.saveInitialPlaces()
+        }
 
         saveButton.isEnabled = false
 
@@ -78,11 +82,11 @@ class NewPlaceViewController: UITableViewController {
         }
 
         // Creating a new location with the data entered by the user
-        newPlace = Place(name: placeName.text!,
-                         location: placeLocation.text,
-                         type: placeType.text,
-                         image: image,
-                         restaurantImage: nil)
+//        newPlace = Place(name: placeName.text!,
+//                         location: placeLocation.text,
+//                         type: placeType.text,
+//                         image: image,
+//                         restaurantImage: nil)
     }
 
     //MARK: - @IBAction
