@@ -53,6 +53,23 @@ class MainViewController: UITableViewController {
         return 85
     }
 
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        // Delete cells from tableview and database by swipe
+
+        let place = places[indexPath.row]
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "delete") { _,_,_ in
+            StorageManager.deleteObject(place)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+
+        return configuration
+    }
+
     //MARK: - @IBAction
 
     @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
