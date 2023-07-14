@@ -19,13 +19,19 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeType: UITextField!
 
     var imageIsChanged = false
+    var currentPlace: Place? // "Place" to which the transition will be made when clicking on the cell
 
     //MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
+
+        setupEditScreen()
         saveButton.isEnabled = false
+        setupEditScreen()
 
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     }
@@ -63,9 +69,17 @@ class NewPlaceViewController: UITableViewController {
         }
     }
 
-    //MARK: - Save new place
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
 
-    func saveNewPlace() {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+
+    //MARK: - Save place
+
+    func savePlace() {
         var image: UIImage?
 
         // Setting a default photo in case the user does not select his photo
@@ -80,7 +94,43 @@ class NewPlaceViewController: UITableViewController {
         // Creating a new location with the data entered by the user (data taken from NewPlace VC)
         let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
 
-        StorageManager.saveObject(newPlace) // Entering into the database
+        if currentPlace != nil { // Updating old value
+            try! realm.write {
+                currentPlace?.name = newPlace.name
+                currentPlace?.location = newPlace.location
+                currentPlace?.type = newPlace.type
+                currentPlace?.imageData = newPlace.imageData
+            }
+        } else { // Entering into the database new value
+            StorageManager.saveObject(newPlace)
+        }
+    }
+
+    //MARK: - Setup edit screen
+
+    private func setupEditScreen() {
+        if currentPlace != nil {
+            guard let data = currentPlace?.imageData, let image = UIImage(data: data) else { return }
+
+            setupNavigationBar()
+            imageIsChanged = true
+
+            placeImage.image = image
+            placeImage.contentMode = .scaleAspectFill
+            placeName.text = currentPlace?.name
+            placeLocation.text = currentPlace?.location
+            placeType.text = currentPlace?.type
+        }
+    }
+
+    private func setupNavigationBar() {
+        if let topItem = navigationController?.navigationBar.topItem {
+            topItem.backBarButtonItem = UIBarButtonItem()
+        }
+
+        navigationItem.leftBarButtonItem = nil
+        title = currentPlace?.name
+        saveButton.isEnabled = true
     }
 
     //MARK: - @IBAction
