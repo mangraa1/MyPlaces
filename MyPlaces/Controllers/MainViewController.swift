@@ -83,10 +83,17 @@ class MainViewController: UITableViewController {
 
     //MARK: - @IBAction
 
-    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+    @IBAction func unwindNewPlaceSegue(_ segue: UIStoryboardSegue) {
         guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
 
         newPlaceVC.savePlace()
         tableView.reloadData()
     }
+
+    @IBAction func unwindFilterSegue(_ segue: UIStoryboardSegue) {
+        guard let filterVC = segue.source as? SortedViewController else { return }
+
+        tableView.reloadData()
+    }
+
 }
