@@ -12,12 +12,45 @@ class MainViewController: UITableViewController {
 
     var places: Results<Place>! // Returns "Place" objects from the database
 
+    var sortedSegmentedControll = 0 // Temporary helper variable for sorting
+
     //MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         places = realm.objects(Place.self)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(sortingSelection(_ :)), name: Notification.Name("SortSelectionDidChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reversedSorting(_ :)), name: Notification.Name("ReversedSortingDidChanged"), object: nil)
+    }
+
+    //MARK: - Notification observers
+
+    @objc func sortingSelection(_ notification: Notification) {
+        if let selectedOption = notification.object as? Int {
+
+            if selectedOption == 0 {
+                places = places.sorted(byKeyPath: "date")
+                sortedSegmentedControll = 0
+            } else {
+                places = places.sorted(byKeyPath: "name")
+                sortedSegmentedControll = 1
+            }
+            tableView.reloadData()
+        }
+    }
+
+    @objc func reversedSorting(_ notification: Notification) {
+        if let selectedOption = notification.object as? Bool {
+
+            if sortedSegmentedControll == 0 {
+                places = places.sorted(byKeyPath: "date", ascending: selectedOption)
+            } else {
+                places = places.sorted(byKeyPath: "name", ascending: selectedOption)
+            }
+            tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
@@ -90,10 +123,6 @@ class MainViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    @IBAction func unwindFilterSegue(_ segue: UIStoryboardSegue) {
-        guard let filterVC = segue.source as? SortedViewController else { return }
-
-        tableView.reloadData()
+    @IBAction func unwindSortedSegue(_ segue: UIStoryboardSegue) {
     }
-
 }

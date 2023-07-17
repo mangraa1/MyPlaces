@@ -11,21 +11,14 @@ class SortedViewController: UITableViewController {
 
     //MARK: @IBOutlets & Variables
 
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var segmentedControl: UISegmentedControl! // Will be used in future versions for UserDefaults
     @IBOutlet weak var imageView: UIImageView!
-
+    @IBOutlet weak var imageSwitch: UISwitch! // Will be used in future versions for UserDefaults
 
     //MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-
-    //MARK: - Save filter settings
-    
-    func saveFilterSettings() {
-
     }
 
     //MARK: - @IBAction
@@ -35,15 +28,24 @@ class SortedViewController: UITableViewController {
     }
 
     @IBAction func sortSelection(_ sender: UISegmentedControl) {
+        let selectedOption = sender.selectedSegmentIndex
+
+        NotificationCenter.default.post(name: Notification.Name("SortSelectionDidChanged"), object: selectedOption)
+    }
+
+    @IBAction func reversedSorting(_ sender: UISwitch) {
+        let  selectedOption = sender.isOn ? true : false
+
+        if selectedOption {
+            imageView.image = UIImage(named: "AZ")
+        } else {
+            imageView.image = UIImage(named: "ZA")
+        }
+
+        NotificationCenter.default.post(name: Notification.Name("ReversedSortingDidChanged"), object: selectedOption)
     }
 
     //MARK: - Table View delegate
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 3 {
-            //TODO: - action to reverse
-        }
-    }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
