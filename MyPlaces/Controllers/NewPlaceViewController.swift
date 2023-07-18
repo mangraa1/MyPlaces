@@ -11,15 +11,15 @@ class NewPlaceViewController: UITableViewController {
 
     //MARK: @IBOutlets & Variables
 
+    var imageIsChanged = false
+    var currentPlace: Place? // "Place" to which the transition will be made when clicking on the cell
+    
     @IBOutlet weak var saveButton: UIBarButtonItem!
 
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
-
-    var imageIsChanged = false
-    var currentPlace: Place? // "Place" to which the transition will be made when clicking on the cell
 
     //MARK: - Life Cycle
 
