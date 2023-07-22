@@ -81,27 +81,20 @@ class MainViewController: UITableViewController {
         }
 
         // Checking if we have at least one "Place" value in the database
-        return places.isEmpty ? 0 : places.count
+        return places.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CustomTableViewCell else { fatalError() }
 
-        var place = Place()
-
         // Array definitions to create a cell
-        if isFiltering { // At the user's request
-            place = filtredPlaces[indexPath.row]
-        } else { // Default
-            place = places[indexPath.row]
-        }
+        let place = isFiltering ? filtredPlaces[indexPath.row] : places[indexPath.row]
 
         cell.nameLabel.text = place.name
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
         cell.imageOfPlace.image = UIImage(data: place.imageData!)
-
-        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
+        cell.cosmosView.rating = place.rating
 
         return cell
     }
@@ -139,13 +132,7 @@ class MainViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
 
-            let place: Place
-
-            if isFiltering {
-                place = filtredPlaces[indexPath.row]
-            } else {
-                place = places[indexPath.row]
-            }
+            let place = isFiltering ? filtredPlaces[indexPath.row] : places[indexPath.row]
 
             let newPlaceVC = segue.destination as! NewPlaceViewController
             newPlaceVC.currentPlace = place

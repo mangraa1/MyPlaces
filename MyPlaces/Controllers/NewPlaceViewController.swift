@@ -13,7 +13,7 @@ class NewPlaceViewController: UITableViewController {
 
     var imageIsChanged = false
     var currentPlace: Place! // "Place" to which the transition will be made when clicking on the cell
-    
+
     @IBOutlet weak var saveButton: UIBarButtonItem!
 
     @IBOutlet weak var placeImage: UIImageView!
@@ -85,7 +85,7 @@ class NewPlaceViewController: UITableViewController {
         if imageIsChanged {
             image = placeImage.image
         } else {
-            image = UIImage(named: "imagePlaceholder")
+            image = UIImage(named: "defaultImagePlaceholder")
         }
 
         let imageData = image?.pngData()
