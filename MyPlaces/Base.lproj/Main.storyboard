@@ -326,7 +326,7 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wl7-iN-1cE">
-                                <rect key="frame" x="343" y="84" width="35" height="35"/>
+                                <rect key="frame" x="348" y="104" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="2S5-xb-el0"/>
                                     <constraint firstAttribute="width" constant="35" id="chT-LO-pjE"/>
@@ -342,10 +342,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6nD-w6-Aq9" firstAttribute="top" secondItem="iBl-A0-uk8" secondAttribute="top" id="A6G-wP-iTQ"/>
-                            <constraint firstItem="Wl7-iN-1cE" firstAttribute="top" secondItem="9LJ-zg-sMf" secondAttribute="top" constant="25" id="MeQ-pZ-xJd"/>
+                            <constraint firstItem="Wl7-iN-1cE" firstAttribute="top" secondItem="9LJ-zg-sMf" secondAttribute="top" constant="45" id="MeQ-pZ-xJd"/>
                             <constraint firstAttribute="bottom" secondItem="6nD-w6-Aq9" secondAttribute="bottom" id="NV1-g6-idn"/>
                             <constraint firstItem="6nD-w6-Aq9" firstAttribute="trailing" secondItem="9LJ-zg-sMf" secondAttribute="trailing" id="nUL-iU-FmU"/>
-                            <constraint firstItem="9LJ-zg-sMf" firstAttribute="trailing" secondItem="Wl7-iN-1cE" secondAttribute="trailing" constant="15" id="oav-bI-OmO"/>
+                            <constraint firstItem="9LJ-zg-sMf" firstAttribute="trailing" secondItem="Wl7-iN-1cE" secondAttribute="trailing" constant="10" id="oav-bI-OmO"/>
                             <constraint firstItem="6nD-w6-Aq9" firstAttribute="leading" secondItem="9LJ-zg-sMf" secondAttribute="leading" id="pwy-63-8ZE"/>
                         </constraints>
                     </view>
