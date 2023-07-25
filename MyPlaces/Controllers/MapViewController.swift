@@ -7,11 +7,13 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapViewController: UIViewController {
 
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
+    let locationManager = CLLocationManager()
 
     @IBOutlet weak var mapView: MKMapView!
 
@@ -21,11 +23,16 @@ class MapViewController: UIViewController {
         mapView.delegate = self
 
         setupPlacemark()
+        checkLocationServices()
     }
+
+    //MARK: - @IBAction
 
     @IBAction func closeVC(_ sender: Any) {
         dismiss(animated: true)
     }
+
+    //MARK: - Private
 
     private func setupPlacemark() {
 
@@ -55,6 +62,74 @@ class MapViewController: UIViewController {
             self.mapView.showAnnotations([annotation], animated: true)
             self.mapView.selectAnnotation(annotation, animated: true)
         }
+    }
+
+    private func checkLocationServices() {
+
+        if CLLocationManager.locationServicesEnabled() {
+            setupLocationManager()
+            checkLocationAuthorization()
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showLocationServicesAlert()
+            }
+        }
+    }
+
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+
+    private func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+
+        case .denied:
+            showAlert(title: "Location access denied",
+                      message: "To display your location on the map, allow access in the device settings.")
+
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+
+        case .restricted:
+            showAlert(title: "Access to geolocation is limited",
+                      message: "Access to geolocation is limited by device settings.")
+
+        case .authorizedAlways:
+            break
+
+        @unknown default:
+            print("New case is available")
+        }
+    }
+
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
+
+    private func showLocationServicesAlert() {
+        let alertController = UIAlertController(title: "Location Services is disabled",
+                                                message: "Turn on location services on your device",
+                                                preferredStyle: .alert)
+
+        // Transfer user to phone settings
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        [settingsAction, cancelAction].forEach { alertController.addAction($0) }
+        present(alertController, animated: true)
     }
 }
 
@@ -87,5 +162,14 @@ extension MapViewController: MKMapViewDelegate {
         }
 
         return annotationView
+    }
+}
+
+//MARK: - CLLocationManagerDelegate
+
+extension MapViewController: CLLocationManagerDelegate {
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkLocationAuthorization()
     }
 }
