@@ -14,6 +14,7 @@ class MapViewController: UIViewController {
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
+    let regionInMeters: Double = 1_000
 
     @IBOutlet weak var mapView: MKMapView!
 
@@ -30,6 +31,15 @@ class MapViewController: UIViewController {
 
     @IBAction func closeVC(_ sender: Any) {
         dismiss(animated: true)
+    }
+
+    @IBAction func centerViewInUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location,
+                                            latitudinalMeters: regionInMeters,
+                                            longitudinalMeters: regionInMeters)
+            mapView.setRegion(region, animated: true)
+        }
     }
 
     //MARK: - Private
