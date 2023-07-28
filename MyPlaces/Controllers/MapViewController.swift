@@ -19,11 +19,13 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapPinImage: UIImageView!
-    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        addressLabel.text = ""
 
         mapView.delegate = self
 
@@ -50,7 +52,7 @@ class MapViewController: UIViewController {
         if incomeSegueIdentifire == "showPlace" {
             setupPlacemark()
             mapPinImage.isHidden = true
-            address.isHidden = true
+            addressLabel.isHidden = true
             doneButton.isHidden = true
         }
     }
@@ -162,6 +164,13 @@ class MapViewController: UIViewController {
             mapView.setRegion(region, animated: true)
         }
     }
+
+    private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
+        let latitude = mapView.centerCoordinate.latitude
+        let lognitude = mapView.centerCoordinate.longitude
+
+        return CLLocation(latitude: latitude, longitude: lognitude)
+    }
 }
 
 //MARK: - MKMapViewDelegate
@@ -193,6 +202,38 @@ extension MapViewController: MKMapViewDelegate {
         }
 
         return annotationView
+    }
+
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let center = getCenterLocation(for: mapView)
+        let geocoder = CLGeocoder()
+
+        // Converting coordinates to address
+        geocoder.reverseGeocodeLocation(center) { (placemarks, error) in
+
+            if let _ = error {
+                print("geocoder error")
+                return
+            }
+
+            guard let placemarks = placemarks else { return }
+
+            let placemark = placemarks.first
+            let streetName = placemark?.thoroughfare
+            let buildNumber = placemark?.subThoroughfare
+
+            // Point address display
+            DispatchQueue.main.async {
+                var addressText = ""
+
+                if let streetName = streetName, let buildNumber = buildNumber  {
+                    addressText += "\(streetName), \(buildNumber)"
+                } else if let streetName = streetName {
+                    addressText += "\(streetName)"
+                }
+                self.addressLabel.text = addressText
+            }
+        }
     }
 }
 

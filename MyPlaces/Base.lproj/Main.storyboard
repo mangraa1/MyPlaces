@@ -409,7 +409,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="address" destination="gWC-nx-YsS" id="xZN-c3-oUy"/>
+                        <outlet property="addressLabel" destination="gWC-nx-YsS" id="xZN-c3-oUy"/>
                         <outlet property="doneButton" destination="4kS-f9-sV0" id="DFz-fY-f7z"/>
                         <outlet property="mapPinImage" destination="HRi-dJ-DbQ" id="43H-O0-a8b"/>
                         <outlet property="mapView" destination="6nD-w6-Aq9" id="Bdy-UZ-yjy"/>
