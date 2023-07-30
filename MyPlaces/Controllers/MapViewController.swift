@@ -21,11 +21,13 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 1_000
     var incomeSegueIdentifire = ""
+    var placeCoordinate: CLLocationCoordinate2D?
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapPinImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var goButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,10 @@ class MapViewController: UIViewController {
         showUserLocation()
     }
 
+    @IBAction func goButtonPressed(_ sender: Any) {
+        getDirections()
+    }
+
     @IBAction func doneButtonPressed(_ sender: Any) {
         mapViewControllerDelegate?.getAddress(addressLabel.text)
         dismiss(animated: true)
@@ -56,11 +62,15 @@ class MapViewController: UIViewController {
     //MARK: - Private
 
     private func setupMapView() {
+
+        goButton.isHidden = true
+
         if incomeSegueIdentifire == "showPlace" {
             setupPlacemark()
             mapPinImage.isHidden = true
             addressLabel.isHidden = true
             doneButton.isHidden = true
+            goButton.isHidden = false
         }
     }
 
@@ -88,6 +98,7 @@ class MapViewController: UIViewController {
             // Linking the description to a specific point on the map
             guard let placemarkLocation = placemark?.location else { return }
             annotation.coordinate = placemarkLocation.coordinate
+            self.placeCoordinate = placemarkLocation.coordinate
 
             self.mapView.showAnnotations([annotation], animated: true)
             self.mapView.selectAnnotation(annotation, animated: true)
@@ -178,6 +189,63 @@ class MapViewController: UIViewController {
 
         return CLLocation(latitude: latitude, longitude: lognitude)
     }
+
+    private func getDirections() {
+
+        // User location coordinates
+        guard let location = locationManager.location?.coordinate else {
+            showAlert(title: "Error", message: "Current location is not found")
+            return
+        }
+
+        // Routing request
+        guard let request = createDirectionsRequest(from: location) else {
+            showAlert(title: "Error", message: "Destination is not found")
+            return
+        }
+
+        let directions = MKDirections(request: request)
+
+        // Route calculation
+        directions.calculate { (response, error) in
+
+            if let error = error {
+                print(error)
+            }
+
+            guard let response = response else {
+                self.showAlert(title: "Error", message: "Directions is not available")
+                return
+            }
+
+
+            for route in response.routes {
+                self.mapView.addOverlay(route.polyline)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+
+                let distance = String(format: "%.1f", route.distance / 1000)
+                let timeInterval = route.expectedTravelTime
+
+                print("Distance to place: \(distance) km.")
+                print("Travel time will be: \(timeInterval) sec.")
+            }
+        }
+    }
+
+    private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
+
+        guard let destinationCoordinate = placeCoordinate else { return nil }
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let destination = MKPlacemark(coordinate: destinationCoordinate)
+
+        // Route parameters
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destination)
+        request.transportType = .automobile
+
+        return request
+    }
 }
 
 //MARK: - MKMapViewDelegate
@@ -241,6 +309,15 @@ extension MapViewController: MKMapViewDelegate {
                 self.addressLabel.text = addressText
             }
         }
+    }
+
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+
+        // Route display
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .systemBlue
+
+        return renderer
     }
 }
 

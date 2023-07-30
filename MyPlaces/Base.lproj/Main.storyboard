@@ -385,11 +385,24 @@
                                     <action selector="doneButtonPressed:" destination="07P-Ku-B2U" eventType="touchUpInside" id="MMY-ka-BAu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1R-YA-21E">
+                                <rect key="frame" x="171.66666666666666" y="693" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TNl-hf-d9n"/>
+                                    <constraint firstAttribute="width" constant="50" id="Xur-tZ-SgT"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="route"/>
+                                <connections>
+                                    <action selector="goButtonPressed:" destination="07P-Ku-B2U" eventType="touchUpInside" id="rc1-kl-PGv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9LJ-zg-sMf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HRi-dJ-DbQ" firstAttribute="centerY" secondItem="6nD-w6-Aq9" secondAttribute="centerY" constant="-20" id="3Eu-SG-mNE"/>
+                            <constraint firstItem="K1R-YA-21E" firstAttribute="centerX" secondItem="6nD-w6-Aq9" secondAttribute="centerX" id="43c-Ey-MhL"/>
                             <constraint firstItem="6nD-w6-Aq9" firstAttribute="top" secondItem="iBl-A0-uk8" secondAttribute="top" id="A6G-wP-iTQ"/>
                             <constraint firstItem="4kS-f9-sV0" firstAttribute="centerX" secondItem="6nD-w6-Aq9" secondAttribute="centerX" id="Fks-VJ-VNG"/>
                             <constraint firstItem="9LJ-zg-sMf" firstAttribute="bottom" secondItem="bYL-0T-w7s" secondAttribute="bottom" constant="40" id="MK1-30-1Od"/>
@@ -400,6 +413,7 @@
                             <constraint firstItem="HRi-dJ-DbQ" firstAttribute="centerX" secondItem="6nD-w6-Aq9" secondAttribute="centerX" id="cjG-wL-jBA"/>
                             <constraint firstItem="9LJ-zg-sMf" firstAttribute="trailing" secondItem="bYL-0T-w7s" secondAttribute="trailing" constant="40" id="d4y-yG-HuZ"/>
                             <constraint firstItem="9LJ-zg-sMf" firstAttribute="trailing" secondItem="gWC-nx-YsS" secondAttribute="trailing" constant="16" id="hJM-n0-ibB"/>
+                            <constraint firstItem="9LJ-zg-sMf" firstAttribute="bottom" secondItem="K1R-YA-21E" secondAttribute="bottom" constant="40" id="jtm-Mf-3L9"/>
                             <constraint firstItem="gWC-nx-YsS" firstAttribute="leading" secondItem="9LJ-zg-sMf" secondAttribute="leading" constant="16" id="kIw-kw-qd8"/>
                             <constraint firstItem="6nD-w6-Aq9" firstAttribute="trailing" secondItem="9LJ-zg-sMf" secondAttribute="trailing" id="nUL-iU-FmU"/>
                             <constraint firstItem="9LJ-zg-sMf" firstAttribute="trailing" secondItem="Wl7-iN-1cE" secondAttribute="trailing" constant="40" id="oav-bI-OmO"/>
@@ -411,6 +425,7 @@
                     <connections>
                         <outlet property="addressLabel" destination="gWC-nx-YsS" id="xZN-c3-oUy"/>
                         <outlet property="doneButton" destination="4kS-f9-sV0" id="DFz-fY-f7z"/>
+                        <outlet property="goButton" destination="K1R-YA-21E" id="9jv-3s-PhK"/>
                         <outlet property="mapPinImage" destination="HRi-dJ-DbQ" id="43H-O0-a8b"/>
                         <outlet property="mapView" destination="6nD-w6-Aq9" id="Bdy-UZ-yjy"/>
                     </connections>
@@ -633,6 +648,7 @@
         <image name="location" width="21.333333969116211" height="21.333333969116211"/>
         <image name="map" width="50" height="50"/>
         <image name="pin" width="42.666667938232422" height="42.666667938232422"/>
+        <image name="route" width="42.666667938232422" height="42.666667938232422"/>
         <image name="userLocation" width="42.666667938232422" height="42.666667938232422"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
