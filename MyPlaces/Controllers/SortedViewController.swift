@@ -54,4 +54,8 @@ class SortedViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
+
+    deinit {
+        print("deinit", SortedViewController.self)
+    }
 }

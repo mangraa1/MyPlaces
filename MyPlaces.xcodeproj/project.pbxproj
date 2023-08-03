@@ -89,6 +89,7 @@
 				04A587D12A7AF111004B98FB /* Helpers */,
 				04A587D22A7AF18A004B98FB /* IBuilder */,
 				04A587D02A7AF041004B98FB /* Support Files */,
+				047EC67C2A575961005C7B28 /* Info.plist */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -99,7 +100,6 @@
 				047EC66E2A57595F005C7B28 /* AppDelegate.swift */,
 				047EC6702A57595F005C7B28 /* SceneDelegate.swift */,
 				047EC6772A575961005C7B28 /* Assets.xcassets */,
-				047EC67C2A575961005C7B28 /* Info.plist */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -126,10 +126,10 @@
 			isa = PBXGroup;
 			children = (
 				04EC54BD2A5811BE00083DA7 /* MainViewController.swift */,
-				0438D1112A59C81100D16FF9 /* CustomTableViewCell.swift */,
 				04546FE92A5C0606001A2CD9 /* NewPlaceViewController.swift */,
 				04932FC72A63360500172EE9 /* SortedViewController.swift */,
 				04B24C322A6C16CA00C6A825 /* MapViewController.swift */,
+				0438D1112A59C81100D16FF9 /* CustomTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

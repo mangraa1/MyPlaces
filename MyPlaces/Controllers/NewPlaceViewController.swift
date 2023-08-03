@@ -158,6 +158,10 @@ class NewPlaceViewController: UITableViewController {
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true)
     }
+
+    deinit {
+        print("deinit", NewPlaceViewController.self)
+    }
 }
 
 //MARK: - Text field delegate

@@ -150,6 +150,11 @@ class MainViewController: UITableViewController {
 
     @IBAction func unwindSortedSegue(_ segue: UIStoryboardSegue) {
     }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("deinit", MainViewController.self)
+    }
 }
 
 //MARK: - UISearchResultsUpdating
