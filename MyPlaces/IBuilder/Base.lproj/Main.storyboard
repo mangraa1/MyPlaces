@@ -370,15 +370,15 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gWC-nx-YsS">
                                 <rect key="frame" x="16" y="184" width="361" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kS-f9-sV0">
-                                <rect key="frame" x="149.66666666666666" y="693" width="94" height="50"/>
+                                <rect key="frame" x="151.33333333333334" y="693" width="90.666666666666657" height="50"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Done">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="30"/>
+                                    <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="30"/>
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -397,10 +397,17 @@
                                     <action selector="goButtonPressed:" destination="07P-Ku-B2U" eventType="touchUpInside" id="rc1-kl-PGv"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance &amp; Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5gI-1t-0iS">
+                                <rect key="frame" x="16" y="134" width="361" height="24"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9LJ-zg-sMf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="5gI-1t-0iS" firstAttribute="top" secondItem="9LJ-zg-sMf" secondAttribute="top" constant="75" id="2bB-Ze-uMs"/>
                             <constraint firstItem="HRi-dJ-DbQ" firstAttribute="centerY" secondItem="6nD-w6-Aq9" secondAttribute="centerY" constant="-20" id="3Eu-SG-mNE"/>
                             <constraint firstItem="K1R-YA-21E" firstAttribute="centerX" secondItem="6nD-w6-Aq9" secondAttribute="centerX" id="43c-Ey-MhL"/>
                             <constraint firstItem="6nD-w6-Aq9" firstAttribute="top" secondItem="iBl-A0-uk8" secondAttribute="top" id="A6G-wP-iTQ"/>
@@ -409,6 +416,7 @@
                             <constraint firstItem="Wl7-iN-1cE" firstAttribute="top" secondItem="9LJ-zg-sMf" secondAttribute="top" constant="48" id="MeQ-pZ-xJd"/>
                             <constraint firstAttribute="bottom" secondItem="6nD-w6-Aq9" secondAttribute="bottom" id="NV1-g6-idn"/>
                             <constraint firstItem="bYL-0T-w7s" firstAttribute="leading" secondItem="9LJ-zg-sMf" secondAttribute="leading" constant="303" id="QDF-yy-UQF"/>
+                            <constraint firstItem="9LJ-zg-sMf" firstAttribute="trailing" secondItem="5gI-1t-0iS" secondAttribute="trailing" constant="16" id="ZKB-1I-ODa"/>
                             <constraint firstItem="6nD-w6-Aq9" firstAttribute="top" secondItem="gWC-nx-YsS" secondAttribute="bottom" constant="-220" id="aSC-wr-bH1"/>
                             <constraint firstItem="HRi-dJ-DbQ" firstAttribute="centerX" secondItem="6nD-w6-Aq9" secondAttribute="centerX" id="cjG-wL-jBA"/>
                             <constraint firstItem="9LJ-zg-sMf" firstAttribute="trailing" secondItem="bYL-0T-w7s" secondAttribute="trailing" constant="40" id="d4y-yG-HuZ"/>
@@ -419,11 +427,13 @@
                             <constraint firstItem="9LJ-zg-sMf" firstAttribute="trailing" secondItem="Wl7-iN-1cE" secondAttribute="trailing" constant="40" id="oav-bI-OmO"/>
                             <constraint firstItem="6nD-w6-Aq9" firstAttribute="leading" secondItem="9LJ-zg-sMf" secondAttribute="leading" id="pwy-63-8ZE"/>
                             <constraint firstItem="Wl7-iN-1cE" firstAttribute="leading" secondItem="9LJ-zg-sMf" secondAttribute="leading" constant="318" id="pyp-Th-sI1"/>
+                            <constraint firstItem="5gI-1t-0iS" firstAttribute="leading" secondItem="9LJ-zg-sMf" secondAttribute="leading" constant="16" id="rMi-Fr-th2"/>
                             <constraint firstItem="9LJ-zg-sMf" firstAttribute="bottom" secondItem="4kS-f9-sV0" secondAttribute="bottom" constant="40" id="rba-hC-Ikd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="gWC-nx-YsS" id="xZN-c3-oUy"/>
+                        <outlet property="distanceLabel" destination="5gI-1t-0iS" id="meq-cE-5J9"/>
                         <outlet property="doneButton" destination="4kS-f9-sV0" id="DFz-fY-f7z"/>
                         <outlet property="goButton" destination="K1R-YA-21E" id="9jv-3s-PhK"/>
                         <outlet property="mapPinImage" destination="HRi-dJ-DbQ" id="43H-O0-a8b"/>

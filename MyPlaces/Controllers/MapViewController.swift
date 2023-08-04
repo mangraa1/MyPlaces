@@ -38,6 +38,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapPinImage: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var goButton: UIButton!
 
@@ -45,6 +46,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
 
         addressLabel.text = ""
+        distanceLabel.text = ""
 
         mapView.delegate = self
 
@@ -62,7 +64,7 @@ class MapViewController: UIViewController {
     }
 
     @IBAction func goButtonPressed(_ sender: Any) {
-        mapManager.getDirections(for: mapView) { location in
+        mapManager.getDirections(for: mapView, label: distanceLabel) { location in
             self.previousLocation = location
         }
     }

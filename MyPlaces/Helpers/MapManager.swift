@@ -101,7 +101,7 @@ class MapManager {
     }
 
     // Build a route from the user's location to the institution
-    func getDirections(for mapView: MKMapView, previousLocation: (CLLocation) -> ()) {
+    func getDirections(for mapView: MKMapView, label: UILabel, previousLocation: (CLLocation) -> ()) {
 
         // User location coordinates
         guard let location = locationManager.location?.coordinate else {
@@ -138,10 +138,11 @@ class MapManager {
                 mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
 
                 let distance = String(format: "%.1f", route.distance / 1000)
-                let timeInterval = route.expectedTravelTime
+                let timeInterval = self.formatSeconds(Int(route.expectedTravelTime))
 
-                print("Distance to place: \(distance) km.")
-                print("Travel time will be: \(timeInterval) sec.")
+//                print("Distance to place: \(distance) km.")
+//                print("Travel time will be: \(timeInterval) min.")
+                label.text = " Distance to place: \(distance) km. \n Travel time will be: \(timeInterval) min."
             }
         }
     }
@@ -228,6 +229,20 @@ class MapManager {
         alertWindow.windowLevel = UIWindow.Level.alert + 1
         alertWindow.makeKeyAndVisible()
         alertWindow.rootViewController?.present(alert, animated: true)
+    }
+
+    //MARK: - Time format
+
+    private func formatSeconds(_ seconds: Int) -> String {
+        let minutes = (seconds % 3600) / 60
+        let remainingSeconds = seconds % 60
+
+        if seconds >= 3600 {
+            let hours = seconds / 3600
+            return String(format: "%02d:%02d:%02d", hours, minutes, remainingSeconds)
+        } else {
+            return String(format: "%02d:%02d", minutes, remainingSeconds)
+        }
     }
 
     deinit {
