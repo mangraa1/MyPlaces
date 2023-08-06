@@ -13,11 +13,13 @@ class MainViewController: UITableViewController {
     // MARK: - Variables
 
     private var places: Results<Place>! // Returns "Place" objects from the database
-    private let searchController = UISearchController(searchResultsController: nil)
     private var filtredPlaces: Results<Place>!
 
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let searchBar = UISearchBar()
+
     private var sortedSegmentedControll = 0 // Helper variable for sorting
-    private var myAscending = true // Helper variable for sorting/
+    private var myAscending = true
 
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -34,16 +36,23 @@ class MainViewController: UITableViewController {
 
         places = realm.objects(Place.self)
 
+        setupSearchController()
+
         NotificationCenter.default.addObserver(self, selector: #selector(sortingSelection(_ :)), name: Notification.Name("SortSelectionDidChanged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reversedSorting(_ :)), name: Notification.Name("ReversedSortingDidChanged"), object: nil)
+    }
 
-        // Setup searchController
+    //MARK: - Setup searchController
+
+    private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         searchController.isActive = false
         navigationItem.searchController = searchController
         searchController.definesPresentationContext = true
+
+        navigationItem.hidesSearchBarWhenScrolling = true
     }
 
     //MARK: - Notification observers
@@ -63,7 +72,6 @@ class MainViewController: UITableViewController {
     }
 
     @objc func reversedSorting(_ notification: Notification) {
-
         if let selectedOption = notification.object as? Bool {
 
             if sortedSegmentedControll == 0 {
@@ -175,7 +183,8 @@ extension MainViewController: UISearchResultsUpdating {
     }
 
     private func filterContentForSearchText(_ searchText: String) { // Search for a place on request
-        filtredPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
+        filtredPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@",
+                                      searchText.lowercased(), searchText.lowercased())
         tableView.reloadData()
     }
 }
