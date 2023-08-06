@@ -15,6 +15,10 @@ class MainViewController: UITableViewController {
     private var places: Results<Place>! // Returns "Place" objects from the database
     private let searchController = UISearchController(searchResultsController: nil)
     private var filtredPlaces: Results<Place>!
+
+    private var sortedSegmentedControll = 0 // Helper variable for sorting
+    private var myAscending = true // Helper variable for sorting/
+
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
@@ -22,8 +26,6 @@ class MainViewController: UITableViewController {
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
-
-    var sortedSegmentedControll = 0 // Temporary helper variable for sorting
 
     //MARK: - Life Cycle
 
@@ -50,10 +52,10 @@ class MainViewController: UITableViewController {
         if let selectedOption = notification.object as? Int {
 
             if selectedOption == 0 {
-                places = places.sorted(byKeyPath: "date")
+                places = places.sorted(byKeyPath: "date", ascending: myAscending)
                 sortedSegmentedControll = 0
             } else {
-                places = places.sorted(byKeyPath: "name")
+                places = places.sorted(byKeyPath: "name", ascending: myAscending)
                 sortedSegmentedControll = 1
             }
             tableView.reloadData()
@@ -61,12 +63,15 @@ class MainViewController: UITableViewController {
     }
 
     @objc func reversedSorting(_ notification: Notification) {
+
         if let selectedOption = notification.object as? Bool {
 
             if sortedSegmentedControll == 0 {
                 places = places.sorted(byKeyPath: "date", ascending: selectedOption)
+                myAscending = selectedOption
             } else {
                 places = places.sorted(byKeyPath: "name", ascending: selectedOption)
+                myAscending = selectedOption
             }
             tableView.reloadData()
         }
@@ -103,6 +108,11 @@ class MainViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        // Hides the searchController
+        if searchController.isActive {
+            searchController.isActive = false
+        }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
