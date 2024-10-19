@@ -2,7 +2,7 @@
 //  Place.swift
 //  MyPlaces
 //
-//  Created by mac on 08.07.2023.
+//  Created by mac on 07.09.2024.
 //
 
 import RealmSwift

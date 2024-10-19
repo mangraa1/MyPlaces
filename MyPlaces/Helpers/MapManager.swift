@@ -2,7 +2,7 @@
 //  MapManager.swift
 //  MyPlaces
 //
-//  Created by mac on 02.08.2023.
+//  Created by mac on 07.09.2024.
 //
 
 import UIKit

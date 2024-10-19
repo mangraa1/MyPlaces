@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  MyPlaces
 //
-//  Created by mac on 22.07.2023.
+//  Created by mac on 07.09.2024.
 //
 
 import UIKit
@@ -135,7 +135,7 @@ extension MapViewController: MKMapViewDelegate {
 
         // Automatic camera zoom to the user's location
         if incomeSegueIdentifire == "showPlace" && previousLocation != nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
                 self.mapManager.showUserLocation(mapView: mapView)
             }
         }
