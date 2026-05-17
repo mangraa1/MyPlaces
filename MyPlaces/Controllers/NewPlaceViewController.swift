@@ -33,6 +33,12 @@ class NewPlaceViewController: UITableViewController {
         setupEditScreen()
 
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+
+        placeName.accessibilityIdentifier = "placeName"
+        placeLocation.accessibilityIdentifier = "placeLocation"
+        placeType.accessibilityIdentifier = "placeType"
+        saveButton.accessibilityIdentifier = "saveButton"
+        placeImage.accessibilityIdentifier = "placeImage"
     }
 
     //MARK: - Table View delegate
@@ -113,7 +119,7 @@ class NewPlaceViewController: UITableViewController {
                              rating: Double(ratingControl.rating))
 
         if currentPlace != nil { // Updating old value
-            try! realm.write {
+            try! StorageManager.realm.write {
                 currentPlace?.name = newPlace.name
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type

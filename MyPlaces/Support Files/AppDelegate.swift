@@ -14,6 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        // UI-тести запускають додаток з аргументом --uitesting,
+        // щоб усі операції Realm йшли в окрему in-memory базу
+        // і не забруднювали виробничі дані.
+        if CommandLine.arguments.contains("--uitesting") {
+            let testConfig = Realm.Configuration(inMemoryIdentifier: "UITestingDB")
+            Realm.Configuration.defaultConfiguration = testConfig
+            StorageManager.realm = try! Realm(configuration: testConfig)
+            return true
+        }
+
         let newSchemaVersion: UInt64 = 2
 
         let config = Realm.Configuration(

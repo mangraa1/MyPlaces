@@ -34,9 +34,12 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        places = realm.objects(Place.self)
+        places = StorageManager.fetchObjects()
 
         setupSearchController()
+
+        tableView.accessibilityIdentifier = "placesTable"
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "addPlace"
 
         NotificationCenter.default.addObserver(self, selector: #selector(sortingSelection(_ :)), name: Notification.Name("SortSelectionDidChanged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reversedSorting(_ :)), name: Notification.Name("ReversedSortingDidChanged"), object: nil)

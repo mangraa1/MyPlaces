@@ -20,6 +20,34 @@
                ReferencedContainer = "container:MyPlaces.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AA11000000000000001DDD01"
+               BuildableName = "MyPlacesTests.xctest"
+               BlueprintName = "MyPlacesTests"
+               ReferencedContainer = "container:MyPlaces.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB11000000000000001DDD01"
+               BuildableName = "MyPlacesUITests.xctest"
+               BlueprintName = "MyPlacesUITests"
+               ReferencedContainer = "container:MyPlaces.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,6 +56,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AA11000000000000001DDD01"
+               BuildableName = "MyPlacesTests.xctest"
+               BlueprintName = "MyPlacesTests"
+               ReferencedContainer = "container:MyPlaces.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BB11000000000000001DDD01"
+               BuildableName = "MyPlacesUITests.xctest"
+               BlueprintName = "MyPlacesUITests"
+               ReferencedContainer = "container:MyPlaces.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
